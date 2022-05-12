@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace day04
 {
@@ -135,5 +136,62 @@ namespace day04
             adapter.Fill(table);
             return table;
         }
-    }   
-}
+
+        public bool insertSelectedCourseByID(int id, int courseid)
+        {
+
+            SqlCommand cmd = new SqlCommand("insert into SelectedCourse values(@sid, @cid)", mydb.getConnection);
+            cmd.Parameters.Add("@sid", SqlDbType.Int).Value = id;
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = courseid;
+            mydb.openConnection();
+            if ((cmd.ExecuteNonQuery() == 1))
+            {
+                mydb.closeConnection();
+                return true;
+            }
+            else
+            {
+                mydb.closeConnection();
+                return false;
+
+            }
+        }
+        public bool RemoveSelectedCourseByID(int id, int courseid)
+        {
+            SqlCommand cmd = new SqlCommand("Delete from SelectedCourse where Student_Id = @sid and Course_Id = @cid", mydb.getConnection);
+            cmd.Parameters.Add("@sid", SqlDbType.Int).Value = id;
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = courseid;
+            mydb.openConnection();
+            if ((cmd.ExecuteNonQuery() == 1))
+            {
+                mydb.closeConnection();
+                return true;
+            }
+            else
+            {
+                mydb.closeConnection();
+                return false;
+
+            }
+        }
+        STUDENT std = new STUDENT();
+        public bool checkDuplicateCourse(int sid, int cid)
+        {
+            SqlCommand cmd = new SqlCommand("Select * From SelectedCourse Where Student_Id=@sid and Course_Id=@cid", mydb.getConnection);
+            cmd.Parameters.Add("@sid", SqlDbType.Int).Value = sid;
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = cid;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            if ((table.Rows.Count > 0))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+}  
+

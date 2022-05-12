@@ -42,6 +42,7 @@ namespace day04
             TextBoxLabel.Text = dr.ItemArray[1].ToString();
             NumericUpDownHours.Value = int.Parse(dr.ItemArray[2].ToString());
             TextBoxDescription.Text = dr.ItemArray[3].ToString();
+            comboBoxSemester.Text = dr.ItemArray[4].ToString();
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
