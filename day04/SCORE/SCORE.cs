@@ -56,6 +56,7 @@ namespace day04
             adapter.Fill(table);
             return table;
         }
+        
         public bool deleteScore(int studentID, int courseID)
         {
             SqlCommand cmd = new SqlCommand("delete from score where student_Id = @sid and course_id=@cid", mydb.getConnection);
@@ -73,8 +74,8 @@ namespace day04
         }
         public DataTable getStudentScore()
         {
-            SqlCommand cmd = new SqlCommand("select score.student_id, std.fname, std.lname, score.course_id, course.label, score." +
-                "student_score from std inner join score on std.id = score.student_id inner join course on score.course_id = course.id", mydb.getConnection);
+            SqlCommand cmd = new SqlCommand("select score.student_Id as 'Student ID', std.fname as 'First Name', std.lname as 'Last Name', score.course_id as 'Course ID', course.label as 'Course Name', score." +
+                "student_score as 'Score' from std inner join score on std.id = score.student_id inner join course on score.course_id = course.id", mydb.getConnection);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             DataTable table = new DataTable();
             adapter.Fill(table);

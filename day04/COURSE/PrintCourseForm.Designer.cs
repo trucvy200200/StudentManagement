@@ -33,11 +33,11 @@
             this.button_Save = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.n = new System.Windows.Forms.Panel();
-            this.btn_Check = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.radioButton_AZ = new System.Windows.Forms.RadioButton();
-            this.radioButton_ZA = new System.Windows.Forms.RadioButton();
             this.radioButton_none = new System.Windows.Forms.RadioButton();
+            this.btn_Check = new System.Windows.Forms.Button();
+            this.radioButton_ZA = new System.Windows.Forms.RadioButton();
+            this.radioButton_AZ = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.n.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +91,19 @@
             this.n.Size = new System.Drawing.Size(808, 77);
             this.n.TabIndex = 7;
             // 
+            // radioButton_none
+            // 
+            this.radioButton_none.AutoSize = true;
+            this.radioButton_none.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_none.ForeColor = System.Drawing.Color.White;
+            this.radioButton_none.Location = new System.Drawing.Point(291, 19);
+            this.radioButton_none.Name = "radioButton_none";
+            this.radioButton_none.Size = new System.Drawing.Size(69, 24);
+            this.radioButton_none.TabIndex = 6;
+            this.radioButton_none.TabStop = true;
+            this.radioButton_none.Text = "None";
+            this.radioButton_none.UseVisualStyleBackColor = true;
+            // 
             // btn_Check
             // 
             this.btn_Check.BackColor = System.Drawing.Color.Black;
@@ -103,30 +116,6 @@
             this.btn_Check.Text = "CHECK";
             this.btn_Check.UseVisualStyleBackColor = false;
             this.btn_Check.Click += new System.EventHandler(this.btn_Check_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(160, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Sort by name: ";
-            // 
-            // radioButton_AZ
-            // 
-            this.radioButton_AZ.AutoSize = true;
-            this.radioButton_AZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_AZ.ForeColor = System.Drawing.Color.White;
-            this.radioButton_AZ.Location = new System.Drawing.Point(386, 19);
-            this.radioButton_AZ.Name = "radioButton_AZ";
-            this.radioButton_AZ.Size = new System.Drawing.Size(56, 24);
-            this.radioButton_AZ.TabIndex = 4;
-            this.radioButton_AZ.TabStop = true;
-            this.radioButton_AZ.Text = "A-Z";
-            this.radioButton_AZ.UseVisualStyleBackColor = true;
             // 
             // radioButton_ZA
             // 
@@ -141,18 +130,29 @@
             this.radioButton_ZA.Text = "Z-A";
             this.radioButton_ZA.UseVisualStyleBackColor = true;
             // 
-            // radioButton_none
+            // radioButton_AZ
             // 
-            this.radioButton_none.AutoSize = true;
-            this.radioButton_none.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_none.ForeColor = System.Drawing.Color.White;
-            this.radioButton_none.Location = new System.Drawing.Point(291, 19);
-            this.radioButton_none.Name = "radioButton_none";
-            this.radioButton_none.Size = new System.Drawing.Size(69, 24);
-            this.radioButton_none.TabIndex = 6;
-            this.radioButton_none.TabStop = true;
-            this.radioButton_none.Text = "None";
-            this.radioButton_none.UseVisualStyleBackColor = true;
+            this.radioButton_AZ.AutoSize = true;
+            this.radioButton_AZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_AZ.ForeColor = System.Drawing.Color.White;
+            this.radioButton_AZ.Location = new System.Drawing.Point(386, 19);
+            this.radioButton_AZ.Name = "radioButton_AZ";
+            this.radioButton_AZ.Size = new System.Drawing.Size(56, 24);
+            this.radioButton_AZ.TabIndex = 4;
+            this.radioButton_AZ.TabStop = true;
+            this.radioButton_AZ.Text = "A-Z";
+            this.radioButton_AZ.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(160, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Sort by name: ";
             // 
             // PrintCourseForm
             // 
@@ -167,6 +167,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "PrintCourseForm";
             this.Text = "PrintCourseForm";
+            this.Load += new System.EventHandler(this.PrintCourseForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.n.ResumeLayout(false);
             this.n.PerformLayout();

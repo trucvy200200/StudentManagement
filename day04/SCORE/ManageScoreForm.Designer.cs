@@ -122,6 +122,8 @@
             this.DataGridViewScore.Location = new System.Drawing.Point(606, 116);
             this.DataGridViewScore.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewScore.Name = "DataGridViewScore";
+            this.DataGridViewScore.RowTemplate.Height = 80;
+            this.DataGridViewScore.RowTemplate.ReadOnly = true;
             this.DataGridViewScore.Size = new System.Drawing.Size(765, 490);
             this.DataGridViewScore.TabIndex = 11;
             this.DataGridViewScore.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewScore_CellClick);

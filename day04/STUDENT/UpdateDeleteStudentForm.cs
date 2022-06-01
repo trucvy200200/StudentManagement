@@ -21,31 +21,38 @@ namespace day04
         STUDENT student = new STUDENT();
         private void btn_Find_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(TextBoxID.Text);
-            SqlCommand command = new SqlCommand("Select * from std where id= " + id);
-            DataTable table = student.getStudenst(command);
-            if (table.Rows.Count > 0)
+            try
             {
-                TextBoxFirstName.Text = table.Rows[0]["fname"].ToString();
-                TextBoxLastName.Text = table.Rows[0]["lname"].ToString();
-                DateTimePicker1.Value = (DateTime)table.Rows[0]["bdate"];
-                if (table.Rows[0]["gender"].ToString().Trim() == "Female")
+                int id = int.Parse(TextBoxID.Text);
+                SqlCommand command = new SqlCommand("Select * from std where id= " + id);
+                DataTable table = student.getStudenst(command);
+                if (table.Rows.Count > 0)
                 {
-                    radioButtonFemale.Checked = true;
+                    TextBoxFirstName.Text = table.Rows[0]["fname"].ToString();
+                    TextBoxLastName.Text = table.Rows[0]["lname"].ToString();
+                    DateTimePicker1.Value = (DateTime)table.Rows[0]["bdate"];
+                    if (table.Rows[0]["gender"].ToString().Trim() == "Female")
+                    {
+                        radioButtonFemale.Checked = true;
+                    }
+                    else
+                    {
+                        radioButtonMale.Checked = true;
+                    }
+                    TextBoxPhone.Text = table.Rows[0]["phone"].ToString();
+                    TextBoxAddress.Text = table.Rows[0]["address"].ToString();
+                    byte[] pic = (byte[])table.Rows[0]["picture"];
+                    MemoryStream picture = new MemoryStream(pic);
+                    PictureBox.Image = Image.FromStream(picture);
                 }
                 else
                 {
-                    radioButtonMale.Checked = true;
+                    MessageBox.Show("not found", "Find student", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                TextBoxPhone.Text = table.Rows[0]["phone"].ToString();
-                TextBoxAddress.Text = table.Rows[0]["address"].ToString();
-                byte[] pic = (byte[])table.Rows[0]["picture"];
-                MemoryStream picture = new MemoryStream(pic);
-                PictureBox.Image = Image.FromStream(picture);
             }
-            else
+            catch
             {
-                MessageBox.Show("not found", "Find student", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Empty Field", "Find student", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }
@@ -299,6 +306,16 @@ namespace day04
         {
             AddCourseFrm frm = new AddCourseFrm();
             frm.Show(this);
+        }
+
+        private void btn_UploadImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opf = new OpenFileDialog();
+            opf.Filter = "Select image(*.jpg;*.png;*gif)|*.jpg;*png;*.gif";
+            if ((opf.ShowDialog() == DialogResult.OK))
+            {
+                    PictureBox.Image = Image.FromFile(opf.FileName);
+            }
         }
     }
 }

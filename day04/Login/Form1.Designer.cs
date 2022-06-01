@@ -39,6 +39,9 @@
             this.TextBoxUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.radioButton_student = new System.Windows.Forms.RadioButton();
+            this.radioButtonHuman = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,6 +157,42 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Username:";
             // 
+            // radioButton_student
+            // 
+            this.radioButton_student.AutoSize = true;
+            this.radioButton_student.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton_student.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.radioButton_student.Location = new System.Drawing.Point(74, 379);
+            this.radioButton_student.Name = "radioButton_student";
+            this.radioButton_student.Size = new System.Drawing.Size(92, 28);
+            this.radioButton_student.TabIndex = 18;
+            this.radioButton_student.Text = "Student";
+            this.radioButton_student.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonHuman
+            // 
+            this.radioButtonHuman.AutoSize = true;
+            this.radioButtonHuman.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonHuman.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.radioButtonHuman.Location = new System.Drawing.Point(261, 379);
+            this.radioButtonHuman.Name = "radioButtonHuman";
+            this.radioButtonHuman.Size = new System.Drawing.Size(177, 28);
+            this.radioButtonHuman.TabIndex = 19;
+            this.radioButtonHuman.Text = "Human Resource";
+            this.radioButtonHuman.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(40, 422);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 16);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "New User?";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,7 +200,10 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(474, 381);
+            this.ClientSize = new System.Drawing.Size(474, 460);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.radioButtonHuman);
+            this.Controls.Add(this.radioButton_student);
             this.Controls.Add(this.btn_Register);
             this.Controls.Add(this.btn_ForgotPassWord);
             this.Controls.Add(this.bt_Login);
@@ -173,7 +215,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Log In";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -192,5 +234,8 @@
         private System.Windows.Forms.TextBox TextBoxUsername;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton radioButton_student;
+        private System.Windows.Forms.RadioButton radioButtonHuman;
+        private System.Windows.Forms.Label label4;
     }
 }

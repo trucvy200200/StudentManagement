@@ -42,147 +42,145 @@ namespace day04
 
         private void btn_Print_Click(object sender, EventArgs e)
         {
-            if (data == "score")
+            try
             {
-                #region one
-                string fileName = "Export_Student_Score.docx";
-                var doc = DocX.Create(fileName);
-                #endregion
-
-                #region two
-                string title = "Student_Score";
-
-                Formatting titleFormat = new Formatting();
-                titleFormat.FontFamily = new Font("Tahoma");
-                titleFormat.Size = 20D;
-                titleFormat.Position = 40;
-                titleFormat.FontColor = Color.BlueViolet;
-                titleFormat.UnderlineColor = Color.Gray;
-                titleFormat.Italic = true;
-
-                //Formatting Text Paragraph  
-                Formatting textParagraphFormat = new Formatting();
-                //font family  
-                textParagraphFormat.FontFamily = new Font("Tahoma");
-                //font size  
-                textParagraphFormat.Size = 12D;
-                //Spaces between characters  
-                textParagraphFormat.Spacing = 1;
-                //Insert title  
-                Paragraph paragraphTitle = doc.InsertParagraph(title, false, titleFormat);
-                paragraphTitle.Alignment = Alignment.center;
-                //Insert text  
-                //doc.InsertParagraph(textParagraph, false, textParagraphFormat);
-                #endregion
-                dataGridView1.AllowUserToAddRows = false;
-                #region four
-                doc.InsertParagraph();
-                //Create Table
-                //var listPlayer = CreateInitData();
-                Table t = doc.AddTable(dataGridView1.Rows.Count + 1, averageIndex + 2);
-                t.Alignment = Alignment.center;
-                t.Design = TableDesign.ColorfulList;
-                // Fill cells by adding text.  
-                // First row
-
-                t.Rows[0].Cells[0].Paragraphs.First().Append("Student ID");
-                t.Rows[0].Cells[1].Paragraphs.First().Append("First Name");
-                t.Rows[0].Cells[2].Paragraphs.First().Append("Last Name");
-                for (int i = 3; i < averageIndex; i++)
+                if (data == "score")
                 {
-                    t.Rows[0].Cells[i].Paragraphs.First().Append(dataGridView1.Columns[i].HeaderText);
+                    #region one
+                    string fileName = "Export_Student_Score.docx";
+                    var doc = DocX.Create(fileName);
+                    #endregion
+
+                    #region two
+                    string title = "Student_Score";
+
+                    Formatting titleFormat = new Formatting();
+                    titleFormat.FontFamily = new Font("Tahoma");
+                    titleFormat.Size = 20D;
+                    titleFormat.Position = 40;
+                    titleFormat.FontColor = Color.BlueViolet;
+                    titleFormat.UnderlineColor = Color.Gray;
+                    titleFormat.Italic = true;
+
+                    //Formatting Text Paragraph  
+                    Formatting textParagraphFormat = new Formatting();
+                    //font family  
+                    textParagraphFormat.FontFamily = new Font("Tahoma");
+                    //font size  
+                    textParagraphFormat.Size = 12D;
+                    //Spaces between characters  
+                    textParagraphFormat.Spacing = 1;
+                    //Insert title  
+                    Paragraph paragraphTitle = doc.InsertParagraph(title, false, titleFormat);
+                    paragraphTitle.Alignment = Alignment.center;
+                    //Insert text  
+                    string textParagraph = "Student ID: " + TextBoxSearch.Text
+                        + "\nName: " + TextBoxFname.Text + " " + TextBoxLname.Text + "\n";
+
+                    doc.InsertParagraph(textParagraph, false, textParagraphFormat);
+                    #endregion
+                    dataGridView1.AllowUserToAddRows = false;
+                    #region four
+                    doc.InsertParagraph();
+                    //Create Table
+                    //var listPlayer = CreateInitData();
+                    Table t = doc.AddTable(dataGridView1.Columns.Count - 4, 2);
+                    t.Alignment = Alignment.center;
+                    t.Design = TableDesign.ColorfulList;
+                    // Fill cells by adding text.  
+                    // First row
+                    t.Rows[0].Cells[0].Paragraphs.First().Append("Course Name");
+                    t.Rows[0].Cells[1].Paragraphs.First().Append("Score");
+
+                    int j = 1;
+                    for (int i = 0; i < averageIndex - 3; i++)
+                    {
+                        t.Rows[j].Cells[0].Paragraphs.First().Append(dataGridView1.Columns[i + 3].HeaderText.ToString());
+                        t.Rows[j].Cells[1].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[i + 3].Value.ToString());
+                        j++;
+                    }
+                    doc.InsertTable(t);
+                    textParagraph = "Average Score: " + dataGridView1.Rows[0].Cells[averageIndex].Value.ToString()
+                        + "\nResult: " + dataGridView1.Rows[0].Cells[averageIndex + 1].Value.ToString();
+                    doc.InsertParagraph(textParagraph, false, textParagraphFormat);
+                    #endregion
+                    #region part of one
+                    doc.Save();
+                    Process.Start("WINWORD.EXE", fileName);
+                    #endregion
+                    Console.Read();
                 }
-                t.Rows[0].Cells[averageIndex].Paragraphs.First().Append("Average Score");
-                t.Rows[0].Cells[averageIndex + 1].Paragraphs.First().Append("Result");
-
-
-                t.Rows[1].Cells[0].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[0].Value.ToString());
-                t.Rows[1].Cells[1].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[1].Value.ToString());
-                t.Rows[1].Cells[2].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[2].Value.ToString());
-                for (int k = 3; k < averageIndex; k++)
+                else
                 {
-                    t.Rows[1].Cells[k].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[k].Value.ToString());
+                    #region one
+                    string fileName = "Export_Score_List.docx";
+                    var doc = DocX.Create(fileName);
+                    #endregion
+
+                    #region two
+                    string title = "Student_Score_List";
+
+                    Formatting titleFormat = new Formatting();
+                    titleFormat.FontFamily = new Font("Tahoma");
+                    titleFormat.Size = 20D;
+                    titleFormat.Position = 40;
+                    titleFormat.FontColor = Color.BlueViolet;
+                    titleFormat.UnderlineColor = Color.Gray;
+                    titleFormat.Italic = true;
+
+                    //Formatting Text Paragraph  
+                    Formatting textParagraphFormat = new Formatting();
+                    //font family  
+                    textParagraphFormat.FontFamily = new Font("Tahoma");
+                    //font size  
+                    textParagraphFormat.Size = 12D;
+                    //Spaces between characters  
+                    textParagraphFormat.Spacing = 1;
+                    //Insert title  
+                    Paragraph paragraphTitle = doc.InsertParagraph(title, false, titleFormat);
+                    paragraphTitle.Alignment = Alignment.center;
+                    //Insert text  
+                    //doc.InsertParagraph(textParagraph, false, textParagraphFormat);
+                    #endregion
+                    dataGridView1.AllowUserToAddRows = false;
+                    #region four
+                    doc.InsertParagraph();
+                    //Create Table
+                    //var listPlayer = CreateInitData();
+                    Table t = doc.AddTable(dataGridView1.Rows.Count + 1, 5);
+                    t.Alignment = Alignment.center;
+                    t.Design = TableDesign.ColorfulList;
+                    // Fill cells by adding text.  
+                    // First row
+                    t.Rows[0].Cells[0].Paragraphs.First().Append("Student ID");
+                    t.Rows[0].Cells[1].Paragraphs.First().Append("First Name");
+                    t.Rows[0].Cells[2].Paragraphs.First().Append("Last Name");
+                    t.Rows[0].Cells[3].Paragraphs.First().Append("Average Score");
+                    t.Rows[0].Cells[4].Paragraphs.First().Append("Result");
+                    int j = 0;
+                    for (int i = 1; i <= dataGridView1.RowCount; i++)
+                    {
+                        t.Rows[i].Cells[0].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[0].Value.ToString());
+                        t.Rows[i].Cells[1].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[1].Value.ToString());
+                        t.Rows[i].Cells[2].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[2].Value.ToString());
+                        t.Rows[i].Cells[3].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[3].Value.ToString());
+                        t.Rows[i].Cells[4].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[4].Value.ToString());
+                        j++;
+                    }
+
+                    doc.InsertTable(t);
+                    #endregion
+                    #region part of one
+                    doc.Save();
+                    Process.Start("WINWORD.EXE", fileName);
+                    #endregion
+                    Console.Read();
                 }
-                t.Rows[1].Cells[averageIndex].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[averageIndex].Value.ToString());
-                t.Rows[1].Cells[averageIndex + 1].Paragraphs.First().Append(dataGridView1.Rows[0].Cells[averageIndex + 1].Value.ToString());
-               
-
-
-                doc.InsertTable(t);
-                #endregion
-                #region part of one
-                doc.Save();
-                Process.Start("WINWORD.EXE", fileName);
-                #endregion
-                Console.Read();
             }
-            else
+            catch
             {
-                #region one
-                string fileName = "Export_Score_List.docx";
-                var doc = DocX.Create(fileName);
-                #endregion
-
-                #region two
-                string title = "Student_Score_List";
-
-                Formatting titleFormat = new Formatting();
-                titleFormat.FontFamily = new Font("Tahoma");
-                titleFormat.Size = 20D;
-                titleFormat.Position = 40;
-                titleFormat.FontColor = Color.BlueViolet;
-                titleFormat.UnderlineColor = Color.Gray;
-                titleFormat.Italic = true;
-
-                //Formatting Text Paragraph  
-                Formatting textParagraphFormat = new Formatting();
-                //font family  
-                textParagraphFormat.FontFamily = new Font("Tahoma");
-                //font size  
-                textParagraphFormat.Size = 12D;
-                //Spaces between characters  
-                textParagraphFormat.Spacing = 1;
-                //Insert title  
-                Paragraph paragraphTitle = doc.InsertParagraph(title, false, titleFormat);
-                paragraphTitle.Alignment = Alignment.center;
-                //Insert text  
-                //doc.InsertParagraph(textParagraph, false, textParagraphFormat);
-                #endregion
-                dataGridView1.AllowUserToAddRows = false;
-                #region four
-                doc.InsertParagraph();
-                //Create Table
-                //var listPlayer = CreateInitData();
-                Table t = doc.AddTable(dataGridView1.Rows.Count + 1, 5);
-                t.Alignment = Alignment.center;
-                t.Design = TableDesign.ColorfulList;
-                // Fill cells by adding text.  
-                // First row
-                t.Rows[0].Cells[0].Paragraphs.First().Append("Student ID");
-                t.Rows[0].Cells[1].Paragraphs.First().Append("First Name");
-                t.Rows[0].Cells[2].Paragraphs.First().Append("Last Name");
-                t.Rows[0].Cells[3].Paragraphs.First().Append("Average Score");
-                t.Rows[0].Cells[4].Paragraphs.First().Append("Result");
-                int j = 0;
-                for (int i = 1; i <= dataGridView1.RowCount; i++)
-                {
-                    t.Rows[i].Cells[0].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[0].Value.ToString());
-                    t.Rows[i].Cells[1].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[1].Value.ToString());
-                    t.Rows[i].Cells[2].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[2].Value.ToString());
-                    t.Rows[i].Cells[3].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[3].Value.ToString());
-                    t.Rows[i].Cells[4].Paragraphs.First().Append(dataGridView1.Rows[j].Cells[4].Value.ToString());
-                    j++;
-                }
-
-                doc.InsertTable(t);
-                #endregion
-                #region part of one
-                doc.Save();
-                Process.Start("WINWORD.EXE", fileName);
-                #endregion
-                Console.Read();
+                MessageBox.Show("File word is open", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
         
         private void btn_Search_Click(object sender, EventArgs e)

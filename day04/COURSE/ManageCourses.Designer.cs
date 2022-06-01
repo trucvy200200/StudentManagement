@@ -48,6 +48,8 @@
             this.LabelTotalCourses = new System.Windows.Forms.Label();
             this.comboBoxSemester = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxTeacher = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownHours)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,7 +98,7 @@
             this.btn_Remove.BackColor = System.Drawing.Color.Crimson;
             this.btn_Remove.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Remove.ForeColor = System.Drawing.Color.Snow;
-            this.btn_Remove.Location = new System.Drawing.Point(308, 434);
+            this.btn_Remove.Location = new System.Drawing.Point(337, 505);
             this.btn_Remove.Name = "btn_Remove";
             this.btn_Remove.Size = new System.Drawing.Size(111, 46);
             this.btn_Remove.TabIndex = 52;
@@ -110,7 +112,7 @@
             this.btn_Add.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Add.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Add.ForeColor = System.Drawing.Color.Snow;
-            this.btn_Add.Location = new System.Drawing.Point(11, 434);
+            this.btn_Add.Location = new System.Drawing.Point(40, 505);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(108, 46);
             this.btn_Add.TabIndex = 51;
@@ -123,7 +125,7 @@
             this.btn_Edit.BackColor = System.Drawing.Color.Green;
             this.btn_Edit.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Edit.ForeColor = System.Drawing.Color.Snow;
-            this.btn_Edit.Location = new System.Drawing.Point(157, 434);
+            this.btn_Edit.Location = new System.Drawing.Point(186, 505);
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(108, 46);
             this.btn_Edit.TabIndex = 50;
@@ -141,6 +143,7 @@
             this.listBoxCourse.Size = new System.Drawing.Size(365, 364);
             this.listBoxCourse.TabIndex = 53;
             this.listBoxCourse.Click += new System.EventHandler(this.listBoxCourse_Click);
+            this.listBoxCourse.DoubleClick += new System.EventHandler(this.listBoxCourse_DoubleClick);
             // 
             // TextBoxID
             // 
@@ -180,7 +183,7 @@
             this.btn_First.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_First.Font = new System.Drawing.Font("Showcard Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_First.ForeColor = System.Drawing.Color.Snow;
-            this.btn_First.Location = new System.Drawing.Point(13, 360);
+            this.btn_First.Location = new System.Drawing.Point(42, 431);
             this.btn_First.Name = "btn_First";
             this.btn_First.Size = new System.Drawing.Size(87, 46);
             this.btn_First.TabIndex = 59;
@@ -194,7 +197,7 @@
             this.btn_Previous.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Previous.Font = new System.Drawing.Font("Showcard Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Previous.ForeColor = System.Drawing.Color.Snow;
-            this.btn_Previous.Location = new System.Drawing.Point(119, 360);
+            this.btn_Previous.Location = new System.Drawing.Point(148, 431);
             this.btn_Previous.Name = "btn_Previous";
             this.btn_Previous.Size = new System.Drawing.Size(87, 46);
             this.btn_Previous.TabIndex = 60;
@@ -208,7 +211,7 @@
             this.btn_Next.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Next.Font = new System.Drawing.Font("Showcard Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Next.ForeColor = System.Drawing.Color.Snow;
-            this.btn_Next.Location = new System.Drawing.Point(226, 360);
+            this.btn_Next.Location = new System.Drawing.Point(255, 431);
             this.btn_Next.Name = "btn_Next";
             this.btn_Next.Size = new System.Drawing.Size(87, 46);
             this.btn_Next.TabIndex = 61;
@@ -222,7 +225,7 @@
             this.btn_Last.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Last.Font = new System.Drawing.Font("Showcard Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Last.ForeColor = System.Drawing.Color.Snow;
-            this.btn_Last.Location = new System.Drawing.Point(332, 360);
+            this.btn_Last.Location = new System.Drawing.Point(361, 431);
             this.btn_Last.Name = "btn_Last";
             this.btn_Last.Size = new System.Drawing.Size(87, 46);
             this.btn_Last.TabIndex = 62;
@@ -260,13 +263,35 @@
             this.label5.TabIndex = 65;
             this.label5.Text = "Semester:";
             // 
+            // comboBoxTeacher
+            // 
+            this.comboBoxTeacher.FormattingEnabled = true;
+            this.comboBoxTeacher.Location = new System.Drawing.Point(202, 372);
+            this.comboBoxTeacher.Name = "comboBoxTeacher";
+            this.comboBoxTeacher.Size = new System.Drawing.Size(215, 21);
+            this.comboBoxTeacher.TabIndex = 67;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(72, 372);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(102, 23);
+            this.label6.TabIndex = 66;
+            this.label6.Text = "Teacher:";
+            // 
             // ManageCourses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(905, 516);
+            this.ClientSize = new System.Drawing.Size(905, 583);
+            this.Controls.Add(this.comboBoxTeacher);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxSemester);
             this.Controls.Add(this.LabelTotalCourses);
@@ -316,5 +341,7 @@
         private System.Windows.Forms.Label LabelTotalCourses;
         private System.Windows.Forms.ComboBox comboBoxSemester;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBoxTeacher;
+        private System.Windows.Forms.Label label6;
     }
 }

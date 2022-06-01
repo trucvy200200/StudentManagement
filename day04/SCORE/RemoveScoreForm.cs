@@ -21,8 +21,8 @@ namespace day04
         {
            try
            {
-                int studentID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells["student_Id"].Value.ToString());
-                int courseID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells["course_id"].Value.ToString());
+                int studentID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells[0].Value.ToString());
+                int courseID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells[3].Value.ToString());
                 if ((MessageBox.Show("Are you sure want to delete this score", "Remove Score", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
                 {
                     if (score.deleteScore(studentID, courseID))

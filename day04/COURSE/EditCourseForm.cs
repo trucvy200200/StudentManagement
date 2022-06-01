@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,16 +20,18 @@ namespace day04
         COURSE course = new COURSE();
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-            string name = Label.Text;
+            string name = Convert.ToString(textBoxLabel.Text);
             int hrs = (int)NumericUpDownHours.Value;
             string desc = Description.Text;
             int id = (int)ComboBoxCourse.SelectedValue;
             int se = (int)comboBoxSemester.SelectedItem;
+            int te = Convert.ToInt32(comboBoxTeacher.SelectedValue);
+
             if (!course.checkCourseName(name, Convert.ToInt32(ComboBoxCourse.SelectedValue)))
             {
                 MessageBox.Show("This Course Name Already Exist", "Edit Course", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else if (course.EditCourse(id,name,hrs,desc,se))
+            else if (course.EditCourse(id,name,hrs,desc,se, te))
             {
                 MessageBox.Show("Course Updated", "Edit Course", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 fillCombo(ComboBoxCourse.SelectedIndex);
@@ -46,9 +49,11 @@ namespace day04
                 int id = Convert.ToInt32(ComboBoxCourse.SelectedValue);
                 DataTable table = new DataTable();
                 table = course.getCourseByID(id);
-                Label.Text = table.Rows[0][1].ToString();
+                textBoxLabel.Text= table.Rows[0][1].ToString();
                 NumericUpDownHours.Value = Int32.Parse(table.Rows[0][2].ToString());
                 Description.Text = table.Rows[0][3].ToString();
+                comboBoxSemester.Text = table.Rows[0][4].ToString();
+                comboBoxTeacher.Text= table.Rows[0][5].ToString();
             }
             catch
             { }
@@ -60,7 +65,7 @@ namespace day04
             ComboBoxCourse.ValueMember = "id";
             ComboBoxCourse.SelectedIndex = index;
         }
-
+        Contact co = new Contact();
         private void EditCourseForm_Load(object sender, EventArgs e)
         {
             ComboBoxCourse.DataSource = course.getAllCourse();
@@ -70,6 +75,10 @@ namespace day04
             comboBoxSemester.Items.Add(1);
             comboBoxSemester.Items.Add(2);
             comboBoxSemester.Items.Add(3);
+            SqlCommand cmd = new SqlCommand("Select Id from mycontact");
+            comboBoxTeacher.DataSource = co.SelectContactList(cmd);
+            comboBoxTeacher.DisplayMember = "Id";
+            comboBoxTeacher.ValueMember= "Id";
         }
 
         private void NumericUpDownHours_ValueChanged(object sender, EventArgs e)

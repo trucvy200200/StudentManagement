@@ -25,7 +25,7 @@ namespace day04
             dataGridView1.ReadOnly = true;
             DataGridViewImageColumn picCol = new DataGridViewImageColumn();
             dataGridView1.RowTemplate.Height = 80;
-            dataGridView1.DataSource = student.getStudenst(command);
+            dataGridView1.DataSource = student.getStudenst2(command);
             dataGridView1.Columns[0].HeaderText = "Student ID";
             dataGridView1.Columns[1].HeaderText = "First Name";
             dataGridView1.Columns[2].HeaderText = "Last Name";
@@ -34,6 +34,12 @@ namespace day04
             dataGridView1.Columns[5].HeaderText = "Phone";
             dataGridView1.Columns[6].HeaderText = "Address";
             dataGridView1.Columns[7].HeaderText = "Picture";
+            dataGridView1.Columns[8].HeaderText = "Selected Course";
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].Cells[8].Value = "Show";
+            }
+            
             picCol = (DataGridViewImageColumn)dataGridView1.Columns[7];
             picCol.ImageLayout = DataGridViewImageCellLayout.Stretch;
             dataGridView1.AllowUserToAddRows = false;
@@ -46,10 +52,7 @@ namespace day04
             fillGrid(cmd);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+      
 
         private void dataGridView1_Click(object sender, EventArgs e)
         {
@@ -222,6 +225,21 @@ namespace day04
             {
                 MessageBox.Show("Please enter a valid ID", "Delete Student", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            Globals.SetGlobalStudentId(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+            SelectedCourseForm frm = new SelectedCourseForm();
+            frm.Show(this);
+        }
+
+    
+
+        private void ManageStudentForm_Load(object sender, EventArgs e)
+        {
+            SqlCommand cmd = new SqlCommand("Select * from std");
+            fillGrid(cmd);
         }
     }
 }

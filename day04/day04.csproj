@@ -98,10 +98,73 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCourseFrm.cs">
+    <Compile Include="Contact\AddNewContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddCourseFrm.Designer.cs">
+    <Compile Include="Contact\AddNewContactForm.Designer.cs">
+      <DependentUpon>AddNewContactForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contact\Contact.cs" />
+    <Compile Include="Contact\ContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contact\ContactForm.Designer.cs">
+      <DependentUpon>ContactForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COURSE\CourseStdList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COURSE\CourseStdList.Designer.cs">
+      <DependentUpon>CourseStdList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HR\EditMyInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HR\EditMyInfoForm.Designer.cs">
+      <DependentUpon>EditMyInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HR\CreateNewAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HR\CreateNewAccountForm.Designer.cs">
+      <DependentUpon>CreateNewAccountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contact\EditContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contact\EditContactForm.Designer.cs">
+      <DependentUpon>EditContactForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HR\FullListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HR\FullListForm.Designer.cs">
+      <DependentUpon>FullListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Globals.cs" />
+    <Compile Include="Contact\SelectContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contact\SelectContactForm.Designer.cs">
+      <DependentUpon>SelectContactForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Group.cs" />
+    <Compile Include="HR\StudentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HR\StudentList.Designer.cs">
+      <DependentUpon>StudentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="STUDENT\SelectedCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="STUDENT\SelectedCourseForm.Designer.cs">
+      <DependentUpon>SelectedCourseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="STUDENT\AddCourseFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="STUDENT\AddCourseFrm.Designer.cs">
       <DependentUpon>AddCourseFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="RESULT\AvgResultForm.cs">
@@ -248,7 +311,38 @@
     <Compile Include="STUDENT\UpdateDeleteStudentForm.Designer.cs">
       <DependentUpon>UpdateDeleteStudentForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddCourseFrm.resx">
+    <Compile Include="User.cs" />
+    <EmbeddedResource Include="Contact\AddNewContactForm.resx">
+      <DependentUpon>AddNewContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contact\ContactForm.resx">
+      <DependentUpon>ContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COURSE\CourseStdList.resx">
+      <DependentUpon>CourseStdList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\EditMyInfoForm.resx">
+      <DependentUpon>EditMyInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\CreateNewAccountForm.resx">
+      <DependentUpon>CreateNewAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contact\EditContactForm.resx">
+      <DependentUpon>EditContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contact\SelectContactForm.resx">
+      <DependentUpon>SelectContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\FullListForm.resx">
+      <DependentUpon>FullListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\StudentList.resx">
+      <DependentUpon>StudentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="STUDENT\SelectedCourseForm.resx">
+      <DependentUpon>SelectedCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="STUDENT\AddCourseFrm.resx">
       <DependentUpon>AddCourseFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RESULT\AvgResultForm.resx">

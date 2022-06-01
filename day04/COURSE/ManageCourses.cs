@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,13 +19,18 @@ namespace day04
         }
         COURSE course = new COURSE();
         int pos;
+        Contact co = new Contact();
         private void ManageCourses_Load(object sender, EventArgs e)
         {
             reloadListBoxData();
                 comboBoxSemester.Items.Add(1);
                 comboBoxSemester.Items.Add(2);
                 comboBoxSemester.Items.Add(3);
-            }
+            SqlCommand cmd = new SqlCommand("Select Id from mycontact");
+            comboBoxTeacher.DataSource = co.SelectContactList(cmd);
+            comboBoxTeacher.DisplayMember = "Id";
+            comboBoxTeacher.ValueMember = "Id";
+        }
         void reloadListBoxData()
         {
             listBoxCourse.DataSource = course.getAllCourse();
@@ -43,6 +49,7 @@ namespace day04
             NumericUpDownHours.Value = int.Parse(dr.ItemArray[2].ToString());
             TextBoxDescription.Text = dr.ItemArray[3].ToString();
             comboBoxSemester.Text = dr.ItemArray[4].ToString();
+            comboBoxTeacher.Text = dr.ItemArray[5].ToString();
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -53,13 +60,14 @@ namespace day04
             int hrs = Convert.ToInt32(NumericUpDownHours.Text);
             string desc = TextBoxDescription.Text;
             int se = (int)comboBoxSemester.SelectedItem;
+            int te = Convert.ToInt32(comboBoxTeacher.SelectedValue);
             if (name.Trim() == "")
             {
                 MessageBox.Show("Add a course name", "Add Course", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if (course.checkCourseName(name))
             {
-                if (course.insertCourse(id, name, hrs, desc,se))
+                if (course.insertCourse(id, name, hrs, desc,se, te))
                 {
                     reloadListBoxData();
                     MessageBox.Show("New Course Inserted", "Add Course", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -82,11 +90,12 @@ namespace day04
             string desc = TextBoxDescription.Text;
             int id = int.Parse(TextBoxID.Text);
             int se = (int)comboBoxSemester.SelectedItem;
+            int te = Convert.ToInt32(comboBoxTeacher.SelectedValue);
             if (!course.checkCourseName(name, Convert.ToInt32(TextBoxID.Text)))
             {
                 MessageBox.Show("This Course Name Already Exist", "Edit Course", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else if (course.EditCourse(id, name, hrs, desc, se))
+            else if (course.EditCourse(id, name, hrs, desc, se, te))
             {
                 MessageBox.Show("Course Updated", "Edit Course", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 reloadListBoxData();
@@ -161,6 +170,13 @@ namespace day04
         {
             pos = course.getAllCourse().Rows.Count - 1;
             showData(pos);
+        }
+
+        private void listBoxCourse_DoubleClick(object sender, EventArgs e)
+        {
+            Globals.SetGlobalCourseId(Convert.ToInt32(listBoxCourse.SelectedValue));
+            CourseStdList frm = new CourseStdList();
+            frm.Show(this);
         }
     }
 }

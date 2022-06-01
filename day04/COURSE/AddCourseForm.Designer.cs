@@ -40,6 +40,8 @@
             this.btn_Add = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxSemester = new System.Windows.Forms.ComboBox();
+            this.comboBoxTeacher = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -123,7 +125,7 @@
             // 
             this.btn_Add.BackColor = System.Drawing.Color.Yellow;
             this.btn_Add.Font = new System.Drawing.Font("Showcard Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Add.Location = new System.Drawing.Point(273, 379);
+            this.btn_Add.Location = new System.Drawing.Point(254, 453);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(274, 44);
             this.btn_Add.TabIndex = 8;
@@ -151,6 +153,26 @@
             this.comboBoxSemester.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSemester.TabIndex = 10;
             // 
+            // comboBoxTeacher
+            // 
+            this.comboBoxTeacher.FormattingEnabled = true;
+            this.comboBoxTeacher.Location = new System.Drawing.Point(244, 384);
+            this.comboBoxTeacher.Name = "comboBoxTeacher";
+            this.comboBoxTeacher.Size = new System.Drawing.Size(215, 21);
+            this.comboBoxTeacher.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(97, 382);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(127, 23);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Teacher ID:";
+            // 
             // AddCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,7 +180,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(630, 446);
+            this.ClientSize = new System.Drawing.Size(630, 533);
+            this.Controls.Add(this.comboBoxTeacher);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBoxSemester);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_Add);
@@ -192,5 +216,7 @@
         private System.Windows.Forms.Button btn_Add;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxSemester;
+        private System.Windows.Forms.ComboBox comboBoxTeacher;
+        private System.Windows.Forms.Label label6;
     }
 }

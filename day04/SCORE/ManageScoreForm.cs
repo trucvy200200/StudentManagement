@@ -18,6 +18,17 @@ namespace day04
             InitializeComponent();
         }
         SCORE score = new SCORE();
+        public void fillGridScore()
+        {
+            DataGridViewScore.DataSource = score.getStudentScore();
+            DataGridViewScore.Columns[0].HeaderText = "Student ID";
+            DataGridViewScore.Columns[1].HeaderText = "First Name";
+            DataGridViewScore.Columns[2].HeaderText = "Last Name";
+            DataGridViewScore.Columns[3].HeaderText = "Course ID";
+            DataGridViewScore.Columns[4].HeaderText = "Course Name";
+            DataGridViewScore.Columns[5].HeaderText = "Score";
+            DataGridViewScore.AllowUserToAddRows = false;
+        }
         private void btn_AddScore_Click(object sender, EventArgs e)
         {
             try
@@ -31,6 +42,7 @@ namespace day04
                     if (score.insertScore(studentId, courseId, scoreValue, description))
                     {
                         MessageBox.Show("Student Score Inserted", "Add Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fillGridScore();                      
                     }
                     else
                     {
@@ -52,14 +64,14 @@ namespace day04
         {
             try
             {
-                int studentID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells["student_Id"].Value.ToString());
-                int courseID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells["course_id"].Value.ToString());
+                int studentID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells[0].Value.ToString());
+                int courseID = Convert.ToInt32(DataGridViewScore.CurrentRow.Cells[3].Value.ToString());
                 if ((MessageBox.Show("Are you sure want to delete this score", "Remove Score", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
                 {
                     if (score.deleteScore(studentID, courseID))
                     {
                         MessageBox.Show("Score Deleted", "Remove Score", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        DataGridViewScore.DataSource = score.getStudentScore();
+                        fillGridScore();
                     }
                     else
                     {
@@ -67,22 +79,17 @@ namespace day04
                     }
 
                 }
-            } 
-           catch
-           {
-                MessageBox.Show("Choose one to remove", "Remove Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-           }
+            }
+            catch
+            {
+                MessageBox.Show("Choose one score to remove", "Remove Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_ShowScore_Click(object sender, EventArgs e)
         {
             data = "score";
-            DataGridViewScore.DataSource = score.getStudentScore(); 
-            DataGridViewScore.Columns[0].HeaderText = "Student ID";
-            DataGridViewScore.Columns[1].HeaderText = "First Name";
-            DataGridViewScore.Columns[2].HeaderText = "Last Name";
-            DataGridViewScore.Columns[3].HeaderText = "Course ID";
-            DataGridViewScore.Columns[4].HeaderText = "Score";
+            fillGridScore();
       
         }
         STUDENT std = new STUDENT();
@@ -112,6 +119,10 @@ namespace day04
             DataGridViewScore.Columns[5].HeaderText = "Phone";
             DataGridViewScore.Columns[6].HeaderText = "Address";
             DataGridViewScore.Columns[7].HeaderText = "Picture";
+            DataGridViewImageColumn picCol = new DataGridViewImageColumn();
+            picCol = (DataGridViewImageColumn)DataGridViewScore.Columns[7];
+            picCol.ImageLayout = DataGridViewImageCellLayout.Stretch;
+            DataGridViewScore.AllowUserToAddRows = false;
         }
 
         private void btn_Average_Click(object sender, EventArgs e)

@@ -12,15 +12,16 @@ namespace day04
     class COURSE
     {
         MY_DB mydb = new MY_DB();
-        public bool insertCourse(int Id, string courseName, int hoursNumber, string description, int semester)
+        public bool insertCourse(int Id, string courseName, int hoursNumber, string description, int semester, int teacherID)
         {
-            SqlCommand command = new SqlCommand("INSERT INTO Course (id, label, period, description, semester)" +
-                "VALUES (@id, @name, @period, @desc, @semester)", mydb.getConnection);
+            SqlCommand command = new SqlCommand("INSERT INTO Course (id, label, period, description, semester, teacher)" +
+                "VALUES (@id, @name, @period, @desc, @semester, @teacher)", mydb.getConnection);
             command.Parameters.Add("@id", SqlDbType.Int).Value = Id;
             command.Parameters.Add("@name", SqlDbType.VarChar).Value = courseName;
             command.Parameters.Add("@period", SqlDbType.Int).Value = hoursNumber;
             command.Parameters.Add("@desc", SqlDbType.VarChar).Value = description;
             command.Parameters.Add("@semester", SqlDbType.Int).Value = semester;
+            command.Parameters.Add("@teacher", SqlDbType.Int).Value = teacherID;
             mydb.openConnection();
             if ((command.ExecuteNonQuery() == 1))
             {
@@ -35,14 +36,15 @@ namespace day04
             }
         }
 
-        public bool EditCourse(int courseID, string courseName, int hoursNumber, string description, int semester)
+        public bool EditCourse(int courseID, string courseName, int hoursNumber, string description, int semester, int teacher)
         {
-            SqlCommand command = new SqlCommand("Update Course set label=@name, period=@hrs, description=@descr, semester=@semester where id=@id ", mydb.getConnection);
+            SqlCommand command = new SqlCommand("Update Course set label=@name, period=@hrs, description=@descr, semester=@semester, teacher=@te where id=@id ", mydb.getConnection);
             command.Parameters.Add("@id", SqlDbType.Int).Value = courseID;
             command.Parameters.Add("@name", SqlDbType.VarChar).Value = courseName;
             command.Parameters.Add("@hrs", SqlDbType.Int).Value = hoursNumber;
             command.Parameters.Add("@descr", SqlDbType.VarChar).Value = description;
             command.Parameters.Add("@semester", SqlDbType.Int).Value = semester;
+            command.Parameters.Add("@te", SqlDbType.Int).Value = teacher;
             mydb.openConnection();
             if ((command.ExecuteNonQuery() == 1))
             {
@@ -179,6 +181,50 @@ namespace day04
         {
             SqlCommand cmd = new SqlCommand("Select * From SelectedCourse Where Student_Id=@sid and Course_Id=@cid", mydb.getConnection);
             cmd.Parameters.Add("@sid", SqlDbType.Int).Value = sid;
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = cid;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            if ((table.Rows.Count > 0))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string getCourseNameByCourseID(int cid)
+        {
+            SqlCommand cmd = new SqlCommand("Select label From Course Where Id=@cid ", mydb.getConnection);
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = cid;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            return Convert.ToString(table.Rows[0].ItemArray[0]);
+        }
+        public string getSemesterByCourseID(int cid)
+        {
+            SqlCommand cmd = new SqlCommand("Select semester From Course Where Id=@cid ", mydb.getConnection);
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = cid;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            return Convert.ToString(table.Rows[0].ItemArray[0]);
+        }
+        public DataTable getStudentByCourse(int cid)
+        {
+            SqlCommand cmd = new SqlCommand("Select a.Student_Id as 'ID', b.fname as 'First Name', b.lname as 'Last Name' from SelectedCourse a inner join std b on a.Student_Id=b.Id  where a.Course_Id=@cid", mydb.getConnection);
+            cmd.Parameters.Add("@cid", SqlDbType.Int).Value = cid;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            return table;
+        }
+        public bool checkExistCourseID(int cid)
+        {
+            SqlCommand cmd = new SqlCommand("Select * From Course Where Id=@cid", mydb.getConnection);
+           
             cmd.Parameters.Add("@cid", SqlDbType.Int).Value = cid;
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             DataTable table = new DataTable();

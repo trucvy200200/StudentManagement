@@ -142,6 +142,27 @@ namespace day04
             adapter.Fill(table);
             return table;
         }
+        public DataTable getStudenst2(SqlCommand command)
+        {
+            DataColumn dc = new DataColumn();
+            command.Connection = mydb.getConnection;
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            table.Columns.Add(dc);
+            dc.ColumnName = "Selected Course";
+            return table;
+        }
+        public DataTable getSelectedCourse()
+        {
+            SqlCommand command = new SqlCommand("select a.Course_Id as 'Course ID', b.label as 'Course Name' from SelectedCourse a inner join Course b on a.Course_Id = b.Id where a.Student_Id=@id", mydb.getConnection);
+            command.Parameters.Add("@id", SqlDbType.Char).Value = Globals.GlobalStudentId;
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            return table;
+          
+        }
         public bool RemoveStudent(int id)
         {
             mydb.openConnection();
